@@ -1,0 +1,41 @@
+<div class="w-100 p-5" style="display:flex; justify-content: center; color:black;">
+    <form [formGroup]="testObjectToSend" class="form-horizontal"  (ngSubmit)="sendTest()">
+        <label for="test_name">Nazwa:
+            <input id="test_name" type="text" placeholder="Podaj nazwę testu" formControlName="test_name">
+        </label>
+        <label for="category">Kategoria:
+            <input id="category" type="text" placeholder="Podaj nazwę kategorii" formControlName="category">
+        </label>
+        <label for="points">Ilość pytań:
+            <input id="points" type="number" placeholder="Ilość pytań" formControlName="points">
+            <button class="btn btn-primary" (click)="generateQuestions()"></button>
+        </label>
+        <div formArrayName="questionsArray">
+            <ng-container *ngFor="let questions of QuestionsArray.controls;  index as i"
+                style="border: 1px splid black;">
+                <div formGroupName="{{i}}">
+                    <h4>Pytanie nr {{i + 1}}</h4>
+                        <label for="question">Nazwa:
+                            <input id="question" type="text" placeholder='Podaj pytanie' formControlName="question_name">
+                        </label>
+                        <button (click)="show()">
+
+                        </button>
+                        <div formArrayName="answers">
+                            <ng-container *ngFor="let answer of ">
+                                <p>Hi</p>
+                            </ng-container>
+                        </div>
+                        <ng-container *ngFor="let answer of ">
+                            <!-- <input type="radio" value="{{i}}" name="answer" formControlName="correct_answer">
+                            <label for="answer">Odpowieź {{j+1}}:
+                                <input id="answer" type="text" placeholder='Podaj odpowiedź' formControlName="answer">
+                            </label> -->
+                        </ng-container>
+                </div>
+            </ng-container>
+        </div>
+        <button class="btn btn-primary" (click)="sendTest()"></button>
+    </form>
+    <!-- <pre>{{testObjectToSend.value | json }}</pre> -->
+</div>
