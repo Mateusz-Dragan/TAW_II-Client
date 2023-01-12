@@ -1,0 +1,41 @@
+<div style="display: flex; justify-content: center; padding: 50px;">
+    <form [formGroup]="questionForm" (ngSubmit)="onSubmit()">
+        <div>
+            <label for="test_name">Nazwa:
+                <input id="test_name" type="text" placeholder="Podaj nazwę testu" formControlName="test_name">
+            </label>
+            <label for="category">Kategoria:
+                <input id="category" type="text" placeholder="Podaj nazwę kategorii" formControlName="category">
+            </label>
+        </div>
+        <div formArrayName="questions">
+            <div *ngFor="let item of questions().controls; let i=index">
+                <div [formGroupName]="i" style="border: 1px solid blue; padding: 10px; width: 600px; margin: 5px;">
+                    Pytanie {{i + 1}}:
+                    <input type="text" formControlName="question" placeholder="Podaj pytanie" />
+                    <label>Poprawna odpowiedź
+                        <input type="number" formControlName="correct_answer" [min]="0" [max]="getAnswersLimit(item)"/>
+                    </label>
+                    <button (click)="removeQuestion(i)">Remove</button>
+                    <div formArrayName="answers">
+                        <div *ngFor="let answer of questionAnswers(i).controls; let j=index">
+                            <div [formGroupName]="j">
+                                Odpowiedź {{j + 1}}:
+                                <input type="text" formControlName="answer" />
+                                <button (click)="removeAnswer(i,j)">
+                                    Usuń
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <button type="button" (click)="addAnswer(i)">
+                        Dodaj odpowiedź
+                    </button>
+                </div>
+            </div>
+            <button type="button" (click)="addQuestion()">Dodaj pytanie</button>
+        </div>
+        <button type="submit" ></button>
+    </form>
+
+</div>{{this.questionForm.value | json}}

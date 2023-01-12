@@ -32,9 +32,8 @@ export class QuizAddComponent implements OnInit {
     return this.testObjectToSend.get('questionsArray') as FormArray
   }
 
-  AnswersArray(question: FormGroup){
-    console.log(question)
-    return 
+  AnswersArray(val: any){
+    return ((val.get('answers') as FormArray).value).controls;
   }
 
 
@@ -42,13 +41,16 @@ export class QuizAddComponent implements OnInit {
     this.array= new FormArray([])
     // console.log(this.array)
     for(let i = 0; i < this.testObjectToSend.value.points; i++){
-      this.array.push(this.patchValues("",0, new FormArray ([new FormControl(''), new FormControl(''), new FormControl(''), new FormControl('')])))
+      this.array.push(this.patchValues("",0, new FormArray ([new FormControl('AS'), new FormControl(''), new FormControl(''), new FormControl('')])))
     }
     this.testObjectToSend.controls['questionsArray'] = this.array
     return this.array
   }
 
   log(val: any) { console.log(val); }
+
+  log2(val: any) { 
+    console.log(((val.get('answers') as FormControl).value).controls);}
 
   patchValues(question_name: String, correct_answer: Number, answers: FormArray){
     return this.fb.group({
@@ -60,8 +62,9 @@ export class QuizAddComponent implements OnInit {
 
   show(){
     //console.log(((this.QuestionsArray.controls)[0].get('answers') as FormControl).value)
-    console.log(this.testObjectToSend.get('questionsArray') as FormArray)
+    console.log((this.testObjectToSend.get('questionsArray') as FormArray).controls)
     console.log(((this.QuestionsArray.controls[0].get('answers') as FormControl).value).controls)
+    //console.log(((this.QuestionsArray.controls[0].get('answers') as FormControl).value).controls)
     // console.log((this.QuestionsArray.controls[0].get('answers') as FormArray))
   }
 

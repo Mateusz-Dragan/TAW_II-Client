@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'quiz-item',
@@ -12,10 +13,10 @@ export class QuizItemComponent implements OnInit {
   @Input() category?: string;
   @Input() points?: number;
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   goToQuiz(): void{
-    console.log(this.id)
+    this.router.navigateByUrl('/quiz/'+this.id)
   }
 
   ngOnInit(): void {

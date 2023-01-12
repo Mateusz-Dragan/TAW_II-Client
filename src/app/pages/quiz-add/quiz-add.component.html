@@ -22,8 +22,12 @@
 
                         </button>
                         <div formArrayName="answers">
-                            <ng-container *ngFor="let answer of ">
-                                <p>Hi</p>
+                            <ng-container *ngFor="let answer of AnswersArray(questions); index as j">
+                                <div formGroupName="{{j}}">
+                                    <label for="answers">Odpowiedź {{j+1}}:
+                                        <input id="answers" type="text" placeholder='Odpowiedź' formControlName="{{j}}">
+                                    </label>
+                                </div>
                             </ng-container>
                         </div>
                         <ng-container *ngFor="let answer of ">
@@ -37,5 +41,6 @@
         </div>
         <button class="btn btn-primary" (click)="sendTest()"></button>
     </form>
+    
     <!-- <pre>{{testObjectToSend.value | json }}</pre> -->
 </div>

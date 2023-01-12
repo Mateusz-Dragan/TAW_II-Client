@@ -15,6 +15,8 @@ import { HomeComponent } from './pages/home/home.component';
 import { DataService } from './services/data.service';
 import { QuizItemComponent } from './pages/quizlist/quiz-item/quiz-item.component';
 import { QuizAddComponent } from './pages/quiz-add/quiz-add.component';
+import { AddQuizComponent } from './pages/add-quiz/add-quiz.component';
+import { SolveTestComponent } from './pages/solve-test/solve-test.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +24,9 @@ import { QuizAddComponent } from './pages/quiz-add/quiz-add.component';
     QuizlistComponent,
     HomeComponent,
     QuizItemComponent,
-    QuizAddComponent
+    QuizAddComponent,
+    AddQuizComponent,
+    SolveTestComponent
   ],
   imports: [
     BrowserModule,

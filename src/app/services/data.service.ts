@@ -8,15 +8,23 @@ export class DataService {
 
   constructor(private http: HttpClient) {
   }
-  
+
   getAllTests() {
     return this.http.get(this.url + '/api/test');
   }
 
-  // sendTest(): void{
-  //   this.http.post(this.url + '/api/test/add');
-  // }
-  // sendQuestions(): void{
+  getTestById(testId: string) {
+    return this.http.get(this.url + '/api/test/' + testId);
+  }
 
-  // }
+  getTestQuestionsById(testId: string) {
+    return this.http.get(this.url + '/api/test/question/' + testId)
+  }
+
+  sendTest(test: { test_name: string, category: string, points: number }) {
+    return this.http.post(this.url + '/api/test/add', test);
+  }
+  sendQuestions(question: { question: string, test_id: number, correct_answer: number, answers: Array<string> }) {
+    return this.http.post(this.url + '/api/test/question/add', question);
+  }
 }
