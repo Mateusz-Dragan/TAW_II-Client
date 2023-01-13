@@ -1,1 +1,32 @@
-<p>solve-test works!</p>
+<div style="padding:25px">
+    <div *ngIf="!test$ && !questions$" class="spinner-grow text primary"></div>
+    <div style="display: flex; align-items: center; flex-direction: column;">
+        <h4>{{test$.test_name}}</h4>
+        <h4>Kategoria: {{test$.category}}</h4>
+    </div>
+
+
+    <div>
+        <div style="display: flex; justify-content: space-around;">
+            <h3>Pytanie: {{questions$[currentQuestionIdx].question}}</h3>
+            <h3>{{currentQuestionIdx + 1}}/{{questions$.length}}</h3>
+        </div>
+        <div style="display: flex; justify-content: space-around;">
+            <label id="example-radio-group-label">Wybierz odpowiedź</label>
+            <mat-radio-group style="display:flex; align-items:center; flex-direction: column;" (change)="handleChange($event)" name="radioGroup1" aria-labelledby="example-radio-group-label" *ngFor="let answer of questions$[currentQuestionIdx].answers; let i = index">
+                <mat-radio-button value={{i}} [checked]="checkIfRadioButtonHasAnswer(i)" 
+                    >
+                    {{answer}}
+                </mat-radio-button>
+            </mat-radio-group>
+        </div>
+        <div style="display: flex; justify-content: space-around;">
+            <button class="btn btn-danger" (click)="previousQuestion()">Cofnij</button>
+            <button *ngIf="currentQuestionIdx !== questions$.length-1" class="btn btn-primary" (click)="nextQuestion()">Przejdź dalej</button>
+            <button *ngIf="currentQuestionIdx === questions$.length-1" class="btn btn-success" (click)="sendAnswers()">Zakończ test</button>
+        </div>
+    </div>
+</div>
+
+<!-- <pre>{{test$ | json }}</pre>
+<pre>{{questions$ | json }}</pre> -->

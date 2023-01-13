@@ -23,7 +23,6 @@ export class AddQuizComponent implements OnInit {
     correct_answer: 0,
     answers: ['']
   }
-  questionsToPrepare = []
 
   constructor(private fb: FormBuilder, private service: DataService) { }
 
@@ -95,7 +94,7 @@ export class AddQuizComponent implements OnInit {
 
   }
 
-  sendQuestions(test_id:number) {
+  async sendQuestions(test_id:number) {
     for (let i = 0; i < this.questionForm.value.questions.length; i++) {
       this.questionToSend={
         question: this.questionForm.value.questions[i].question,
@@ -103,8 +102,7 @@ export class AddQuizComponent implements OnInit {
         correct_answer: this.questionForm.value.questions[i].correct_answer,
         answers: this.addAnswersToArray((this.questionForm.value.questions[i].answers))
       }
-      console.log(this.questionToSend)
-      this.service.sendQuestions(this.questionToSend).subscribe(response => {
+      await this.service.sendQuestions(this.questionToSend).subscribe(response => {
         console.log(response)
       })
     }
