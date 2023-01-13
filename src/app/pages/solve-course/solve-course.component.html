@@ -1,1 +1,28 @@
-<p>solve-course works!</p>
+<div style="padding:25px">
+    <div *ngIf="!course$ && !courseMaterials$" class="spinner-grow text primary"></div>
+    <div *ngIf="course$ && courseMaterials$">
+    <div style="display: flex; align-items: center; flex-direction: column;">
+        <h4>{{course$.course_name}}</h4>
+        <h4>Kategoria: {{course$.category}}</h4>
+    </div>
+
+
+    <div>
+        <div style="display: flex; justify-content: flex-end;">
+            <h3>Strona: {{currentMaterialIdx + 1}}/{{courseMaterials$.length}}</h3>
+        </div>
+        <div style="display: flex; justify-content: center;">
+            <div style="display: flex; justify-content: flex-start; background-color: white; width: 70%; 
+                        height: 500px; color: black; border-radius: 5px; padding: 15px;">
+                <p>{{courseMaterials$[currentMaterialIdx].content}}</p>
+            </div>
+        </div>
+        <div style="display: flex; justify-content: space-around;">
+            <button class="btn btn-danger" (click)="previousMaterial()" [disabled]="disableButton()">Cofnij</button>
+            <button *ngIf="currentMaterialIdx !== courseMaterials$.length-1" class="btn btn-primary"
+                (click)="nextMaterial()">Przejdź dalej</button>
+            <button *ngIf="currentMaterialIdx === courseMaterials$.length-1" class="btn btn-success"
+                (click)="goToPage()">Zakończ kurs</button>
+        </div>
+    </div>
+</div>

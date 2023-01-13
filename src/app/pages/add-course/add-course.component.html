@@ -1,1 +1,25 @@
-<p>add-course works!</p>
+<div style="display: flex; justify-content: center; padding: 50px;">
+    <form [formGroup]="courseForm" (ngSubmit)="onSubmit()">
+        <div>
+            <label for="course_name">Nazwa:
+                <input id="course_name" type="text" placeholder="Podaj nazwę kursu" formControlName="course_name">
+            </label>
+            <label for="category">Kategoria:
+                <input id="category" type="text" placeholder="Podaj nazwę kategorii" formControlName="category">
+            </label>
+        </div>
+        <div formArrayName="course_materials">
+            <div *ngFor="let item of courseMaterials().controls; let i=index">
+                <div [formGroupName]="i" style="border: 1px solid blue; padding: 10px; width: 600px; margin: 5px;">
+                    Materiał {{i + 1}}:
+                    <textarea formControlName="content" placeholder="Podaj materiał"></textarea>
+                    <button (click)="removeCourseMaterial(i)">Usuń materiał</button>
+                    
+                </div>
+            </div>
+            <button type="button" (click)="addCourseMaterial()">Dodaj materiał do kursu</button>
+        </div>
+        <button type="submit" >Dodaj kurs</button>
+    </form>
+
+</div>{{this.courseForm.value | json}}

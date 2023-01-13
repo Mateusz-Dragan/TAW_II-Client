@@ -9,115 +9,77 @@ import { DataService } from 'src/app/services/data.service';
 })
 export class AddCourseComponent implements OnInit {
 
-  public test_id$: any;
-  questionForm!: FormGroup;
-  testToSend = {
-    test_name: '',
+  public course_id$: any;
+  courseForm!: FormGroup;
+  courseToSend = {
+    course_name: '',
     category: '',
-    points: 0
   }
 
-  questionToSend = {
-    question: '',
-    test_id: 0,
-    correct_answer: 0,
-    answers: ['']
+  courseMaterialToSend = {
+    content: '',
+    course_id: 0
   }
 
   constructor(private fb: FormBuilder, private service: DataService) { }
 
   ngOnInit() {
-    this.questionForm = this.fb.group({
-      test_name: "",
+    this.courseForm = this.fb.group({
+      course_name: "",
       category: "",
-      questions: this.fb.array([])
+      course_materials: this.fb.array([])
     });
   }
 
-  questions(): FormArray {
-    return this.questionForm.get('questions') as FormArray;
+  courseMaterials(): FormArray {
+    return this.courseForm.get('course_materials') as FormArray;
   }
 
-  newQuestion(): FormGroup {
+  newCourseMaterial(): FormGroup {
     return this.fb.group({
-      question: '',
-      correct_answer: 0,
-      answers: this.fb.array([])
+      content: '',
     });
   }
 
-  addQuestion() {
-    this.questions().push(this.newQuestion());
+  addCourseMaterial() {
+    this.courseMaterials().push(this.newCourseMaterial());
   }
 
-  removeQuestion(empIndex: number) {
-    this.questions().removeAt(empIndex);
+  removeCourseMaterial(empIndex: number) {
+    this.courseMaterials().removeAt(empIndex);
   }
 
-  getAnswersLimit(val: any) {
-    if (val.value.answers.length === 0)
-      return 0
-    return val.value.answers.length - 1
-  }
 
-  questionAnswers(empIndex: number): FormArray {
-    return this.questions()
-      .at(empIndex)
-      .get('answers') as FormArray;
-  }
-
-  newAnswer(): FormGroup {
-    return this.fb.group({
-      answer: ''
-    });
-  }
-
-  addAnswer(empIndex: number) {
-    this.questionAnswers(empIndex).push(this.newAnswer());
-  }
-
-  removeAnswer(Index: number, answerIndex: number) {
-    this.questionAnswers(Index).removeAt(answerIndex);
-  }
-
-  sendTestObject() {
-    this.testToSend = {
-      test_name: this.questionForm.value.test_name,
-      category: this.questionForm.value.category,
-      points: this.questionForm.value.questions.length
+  sendCourseObject() {
+    this.courseToSend = {
+      course_name: this.courseForm.value.course_name,
+      category: this.courseForm.value.category,
     }
-    this.service.sendTest(this.testToSend).subscribe(response => {
-      this.test_id$ = response;
-      this.sendQuestions(this.test_id$.id)
-      console.log(this.test_id$)
+    this.service.sendCourse(this.courseToSend).subscribe(response => {
+      this.course_id$ = response;
+      this.sendCourseMaterials(this.course_id$.id)
+      console.log(this.course_id$)
     });
 
   }
 
-  async sendQuestions(test_id:number) {
-    for (let i = 0; i < this.questionForm.value.questions.length; i++) {
-      this.questionToSend={
-        question: this.questionForm.value.questions[i].question,
-        test_id: test_id,
-        correct_answer: this.questionForm.value.questions[i].correct_answer,
-        answers: this.addAnswersToArray((this.questionForm.value.questions[i].answers))
+  async sendCourseMaterials(course_id:number) {
+    console.log(course_id)
+    for (let i = 0; i < this.courseForm.value.course_materials.length; i++) {
+      this.courseMaterialToSend={
+        course_id: course_id,
+        content: this.courseForm.value.course_materials[i].content
       }
-      await this.service.sendQuestions(this.questionToSend).subscribe(response => {
+      console.log(this.courseMaterialToSend)
+      await this.service.sendCourseMaterials(this.courseMaterialToSend).subscribe(response => {
         console.log(response)
       })
     }
   }
 
-  addAnswersToArray(answers: any){
-    let array = []
-    for(let i = 0; i< answers.length; i++){
-      array.push(answers[i].answer)
-    }
-    return array
-  }
 
 
   onSubmit() {
-    this.sendTestObject();
+    this.sendCourseObject()
   }
 }

@@ -41,7 +41,7 @@ export class DataService {
   }
 
   getCourseMaterialsById(courseId: string){
-    return this.http.get(this.url + '/api/test/course/material/' + courseId)
+    return this.http.get(this.url + '/api/course/material/' + courseId)
   }
 
   sendCourse(course: { course_name: string, category: string}) {
