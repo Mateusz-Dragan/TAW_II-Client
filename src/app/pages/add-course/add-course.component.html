@@ -1,25 +1,28 @@
 <div style="display: flex; justify-content: center; padding: 50px;">
-    <form [formGroup]="courseForm" (ngSubmit)="onSubmit()">
-        <div>
-            <label for="course_name">Nazwa:
+    <form style="width: 70%; height: 60%; padding: 25px;" class="card" [formGroup]="courseForm" (ngSubmit)="onSubmit()">
+        <div class="card-header" style="display: flex; align-items: center; flex-direction: column;">
+            <div style="display: flex; flex-direction: column; padding: 10px;">
+                <span style="color: black; font-size: large;">Nazwa kursu: </span>
                 <input id="course_name" type="text" placeholder="Podaj nazwę kursu" formControlName="course_name">
-            </label>
-            <label for="category">Kategoria:
+            </div>
+            <div style="display: flex; flex-direction: column; padding: 10px;">
+                <span style="color: black; font-size: large;">Kategoria:</span>
                 <input id="category" type="text" placeholder="Podaj nazwę kategorii" formControlName="category">
-            </label>
+            </div>
         </div>
-        <div formArrayName="course_materials">
+        <div class="card-body" style="display: flex; align-items: center; flex-direction: column;" formArrayName="course_materials">
+            <div style=" overflow-y: auto; height: 400px;">
             <div *ngFor="let item of courseMaterials().controls; let i=index">
-                <div [formGroupName]="i" style="border: 1px solid blue; padding: 10px; width: 600px; margin: 5px;">
-                    Materiał {{i + 1}}:
-                    <textarea formControlName="content" placeholder="Podaj materiał"></textarea>
-                    <button (click)="removeCourseMaterial(i)">Usuń materiał</button>
-                    
+                <div [formGroupName]="i" style=" padding: 15px; width: 600px; margin: 5px;">
+                    <span style="color: black; font-size: 16px">Materiał: {{i+1}} </span>
+                    <textarea style="width:100%" formControlName="content" placeholder="Tekst {{i+1}}"></textarea>
+                    <button class="btn btn-danger" (click)="removeCourseMaterial(i)">Usuń materiał</button>
+
                 </div>
             </div>
-            <button type="button" (click)="addCourseMaterial()">Dodaj materiał do kursu</button>
+            
+        </div><button mat-raised-button color="accent" type="button" (click)="addCourseMaterial()">Dodaj materiał do kursu</button>
         </div>
-        <button type="submit" >Dodaj kurs</button>
+        <button style="width:25%" mat-raised-button color="accent" type="submit">Dodaj kurs</button>
     </form>
-
-</div>{{this.courseForm.value | json}}
+</div>

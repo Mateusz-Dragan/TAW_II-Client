@@ -1,5 +1,11 @@
-<div (click)="goToQuiz()" style="height:100px; width:90%; border: 2px solid gray; border-radius: 5px; cursor: pointer; padding: 5px; background-color: white; color:black">
-<p>{{testName}}</p>
-<p>Kategoria: {{category}}</p>
-<p>Ilość punktów w teście: {{points}}</p>
+<div class="card" 
+    style="width:90%; border: 2px solid gray; border-radius: 5px; cursor: pointer; padding: 5px; background-color: white; color:black">
+    <div class="card-header" style="display: flex; justify-content: space-between;">
+        <h2>Test: {{testName}}</h2>
+        <button class="btn btn-danger" (click)="deleteTest()">Usuń</button>
+    </div>
+    <div class="card-body" (click)="goToQuiz()">
+        <h3>Kategoria: {{category}}</h3>
+        <p>Ilość pytań w teście: {{points}}</p>
+    </div>
 </div>

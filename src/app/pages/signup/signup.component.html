@@ -1,0 +1,29 @@
+<div style=" display: flex; justify-content: center; align-items: center; height: 80%;">
+    <div class="card" style="width: 30%; height: 60%;">
+        <h4 class="card-header" style="color: black; font-size: large;">Utwórz konto</h4>
+        <div class="card-body" style="  width: 100%; padding: 25px;">
+            <form (ngSubmit)="onSubmit()">
+                <div>
+                    <p style="color: black; font-size: 18px;">Nazwa użytkownika:</p>
+                    <input style="width: 100%; margin-bottom: 10px;" type="text" name="name"
+                        placeholder="Nazwa użytkownika" [(ngModel)]="signUpObject.name" required/>
+                </div>
+                <div>
+                    <p style="color: black; font-size: 18px;">Username:</p>
+                    <input style="width: 100%; margin-bottom: 10px;" type="text" name="username" placeholder="Username"
+                        [(ngModel)]="signUpObject.username" required/>
+                </div>
+                <div>
+                    <p style="color: black; font-size: 18px;">Hasło:</p>
+                    <input style="width: 100%; margin-bottom: 10px;" type="password" name="password" placeholder="Hasło"
+                        [(ngModel)]="signUpObject.password" required/>
+                </div>
+                <div style="display: flex; justify-content: center;">
+                    <button [disabled]="signUpObject.name=== '' || signUpObject.username=== '' || signUpObject.password===''" style="float: right;" class="btn btn-primary" type="submit">Stwórz konto</button>
+                </div>
+            </form>
+            <div style="display: flex; justify-content: flex-end;"><a href="/signin">Zaloguj się</a></div>
+            
+        </div>
+    </div>
+</div>

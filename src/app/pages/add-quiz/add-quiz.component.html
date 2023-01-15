@@ -1,41 +1,51 @@
 <div style="display: flex; justify-content: center; padding: 50px;">
-    <form [formGroup]="questionForm" (ngSubmit)="onSubmit()">
-        <div>
-            <label for="test_name">Nazwa:
-                <input id="test_name" type="text" placeholder="Podaj nazwę testu" formControlName="test_name">
-            </label>
-            <label for="category">Kategoria:
-                <input id="category" type="text" placeholder="Podaj nazwę kategorii" formControlName="category">
-            </label>
+    <form style="width: 70%; height: 60%; padding: 25px;" class="card" [formGroup]="questionForm"
+        (ngSubmit)="onSubmit()">
+        <div class="card-header" style="display: flex; align-items: center; flex-direction: column;">
+            <div style="display: flex; flex-direction: column; padding: 10px;">
+                <span style="color: black; font-size: large;">Nazwa testu: </span>
+                <input style="margin-top: 2px;" id="test_name" type="text" placeholder="Podaj nazwę testu"
+                    formControlName="test_name">
+            </div>
+            <div style="display: flex; flex-direction: column; padding: 10px;">
+                <span style="color: black; font-size: large;">Kategoria:</span>
+                <input style="margin-top: 2px;" id="category" type="text" placeholder="Podaj nazwę kategorii"
+                    formControlName="category">
+            </div>
         </div>
-        <div formArrayName="questions">
-            <div *ngFor="let item of questions().controls; let i=index">
-                <div [formGroupName]="i" style="border: 1px solid blue; padding: 10px; width: 600px; margin: 5px;">
-                    Pytanie {{i + 1}}:
-                    <input type="text" formControlName="question" placeholder="Podaj pytanie" />
-                    <label>Poprawna odpowiedź
-                        <input type="number" formControlName="correct_answer" [min]="0" [max]="getAnswersLimit(item)"/>
-                    </label>
-                    <button (click)="removeQuestion(i)">Usuń pytanie</button>
-                    <div formArrayName="answers">
-                        <div *ngFor="let answer of questionAnswers(i).controls; let j=index">
-                            <div [formGroupName]="j">
-                                Odpowiedź {{j + 1}}:
-                                <input type="text" formControlName="answer" />
-                                <button (click)="removeAnswer(i,j)">
-                                    Usuń
-                                </button>
+        <div class="card-body" style="display: flex; align-items: center; flex-direction: column;"
+            formArrayName="questions">
+            <div style=" overflow-y: auto; height: 400px;">
+                <div *ngFor="let item of questions().controls; let i=index">
+                    <div [formGroupName]="i" style=" padding: 15px; width: 600px; margin: 5px;">
+                        <span style="color: black; font-size: large;">Pytanie {{i + 1}}: </span>
+                        <input type="text" formControlName="question" placeholder="Podaj pytanie" />
+                        <span style="color: black; font-size: 16px">Wybierz odpowiedź: </span>
+                        <input type="number" formControlName="correct_answer" [min]="0" [max]="getAnswersLimit(item)" />
+                        <button mat-raised-button color="accent" (click)="removeQuestion(i)">Usuń pytanie</button>
+                        <div formArrayName="answers" style="padding: 5px;">
+                            <div *ngFor="let answer of questionAnswers(i).controls; let j=index">
+                                <div [formGroupName]="j" style="padding-top: 5px;">
+                                    <span style="color: black; font-size: 16px">Odpowiedź: {{j+1}} </span>
+                                    <input type="text" formControlName="answer" placeholder="Odp {{j+1}}" />
+                                    <button class="btn btn-danger" (click)="removeAnswer(i,j)">
+                                        Usuń
+                                    </button>
+                                </div>
                             </div>
                         </div>
+                        <button mat-raised-button color="accent" type="button" (click)="addAnswer(i)">
+                            Dodaj odpowiedź
+                        </button>
+                        <hr>
                     </div>
-                    <button type="button" (click)="addAnswer(i)">
-                        Dodaj odpowiedź
-                    </button>
                 </div>
             </div>
-            <button type="button" (click)="addQuestion()">Dodaj pytanie</button>
+            <button mat-raised-button color="accent" type="button" (click)="addQuestion()">Dodaj pytanie</button>
         </div>
-        <button type="submit" >Dodaj test</button>
+        <button [disabled]="this.questionForm.value.test_name ==='' || this.questionForm.value.category ==='' || this.questionForm.value.questions.length < 1 ||
+        this.questionForm.value.questions[0].question === ''" style="width:25%" mat-raised-button color="accent"
+            type="submit">Dodaj test</button>
     </form>
 
 </div>

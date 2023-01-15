@@ -1,12 +1,12 @@
 <div style="padding: 40px;">
-    <div style="display:flex; justify-content: flex-end;">
-        <button mat-button class="btn btn-primary" routerLink="/quizadd">
+    <div style="display:flex; justify-content: space-between;">
+        <input style="width:90%" [(ngModel)]="this.search" (ngModelChange)="filterTestNames()" placeholder="Szukaj po nazwie testu">
+        <button mat-raised-button color="accent" routerLink="/quizadd">
             <span>Dodaj Test</span>
           </button>
-        <button class="btn btn-primary">Zarządzaj Testami</button>
     </div>
-    <div style="display:flex; justify-content: space-between; align-items: stretch; flex-wrap: wrap; overflow-y: auto; height: 700px; padding-top: 10px;">
-        <div style="width:25%; padding-top: 15px;"*ngFor="let test of tests$">
+    <div style="display:flex; flex-wrap: wrap; overflow-y: auto; height: 700px; padding-top: 10px;">
+        <div style="width:25%; padding-top: 15px;"*ngFor="let test of currentTests$">
             <quiz-item [id]="test.id" [testName]="test.test_name" [category]="test.category" [points]="test.points"></quiz-item>
           </div>
     </div>

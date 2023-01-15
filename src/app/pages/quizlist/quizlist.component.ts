@@ -9,6 +9,9 @@ import { DataService } from 'src/app/services/data.service';
 export class QuizlistComponent implements OnInit {
 
   public tests$: any;
+  public currentTests$: any
+  search=''
+
   constructor(private service: DataService) { }
 
   ngOnInit(): void {
@@ -18,7 +21,18 @@ export class QuizlistComponent implements OnInit {
   getAll(){
     this.service.getAllTests().subscribe(response => {
       this.tests$ = response;
+      this.currentTests$ = this.tests$
     });
+  }
+  filterTestNames(){
+    if(this.search === ''){
+      this.currentTests$ = this.tests$
+    }
+    else{
+      this.currentTests$=this.tests$.filter((obj: { test_name: string | string[]; })=>{
+        return obj.test_name.includes(this.search)
+      })
+    }
   }
 }
 

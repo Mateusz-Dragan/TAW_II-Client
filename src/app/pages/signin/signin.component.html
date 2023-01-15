@@ -1,0 +1,24 @@
+<div style=" display: flex; justify-content: center; align-items: center; height: 80%;">
+    <div class="card" style="width: 30%; height: 60%;">
+        <h4 class="card-header" style="color: black; font-size: large;">Logowanie</h4>
+        <div class="card-body" style="  width: 100%; padding: 25px;">
+            <form (ngSubmit)="onSubmit()">
+                <div>
+                    <p style="color: black; font-size: 18px;">Username:</p>
+                    <input style="width: 100%; margin-bottom: 10px;" type="text" name="username" placeholder="Username"
+                        [(ngModel)]="signInObject.username" required/>
+                </div>
+                <div>
+                    <p style="color: black; font-size: 18px;">Hasło:</p>
+                    <input style="width: 100%; margin-bottom: 10px;" type="password" name="password" placeholder="Hasło"
+                        [(ngModel)]="signInObject.password" required/>
+                </div>
+                <div style="display: flex; justify-content: center;">
+                    <button [disabled]="signInObject.name=== '' || signInObject.username=== '' || signInObject.password===''" style="float: right;" class="btn btn-primary" type="submit">Zaloguj się</button>
+                </div>
+            </form>
+            <div style="display: flex; justify-content: center; padding-top: 5px;"><a href="/signup">Nie posiadasz jeszcze konta? Przycisnij tutaj aby utworzyć.</a></div>
+            
+        </div>
+    </div>
+</div>

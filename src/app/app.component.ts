@@ -4,6 +4,8 @@ import {BreakpointObserver} from '@angular/cdk/layout';
 import { delay, filter } from 'rxjs/operators';
 import { NavigationEnd, Router } from '@angular/router';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
+import { AuthService } from './services/auth.service';
+import { AsyncLocalStorage } from 'async_hooks';
 
 @UntilDestroy()
 @Component({
@@ -14,7 +16,7 @@ import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 export class AppComponent {
   @ViewChild(MatSidenav) sidenav!: MatSidenav;
 
-  constructor(private observer: BreakpointObserver, private router: Router){
+  constructor(private observer: BreakpointObserver, private router: Router, public auth: AuthService){
 
   }
 
@@ -41,6 +43,11 @@ export class AppComponent {
           this.sidenav.close();
         }
       });
+  }
+
+
+  logOut(){
+    localStorage.removeItem('accessToken');
   }
   
 }

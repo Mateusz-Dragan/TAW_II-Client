@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { DataService } from 'src/app/services/data.service';
 
 @Component({
   selector: 'quiz-item',
@@ -13,10 +14,17 @@ export class QuizItemComponent implements OnInit {
   @Input() category?: string;
   @Input() points?: number;
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private data: DataService) { }
 
-  goToQuiz(): void{
-    this.router.navigateByUrl('/quiz/'+this.id)
+  goToQuiz(): void {
+    this.router.navigateByUrl('/quiz/' + this.id)
+  }
+
+  deleteTest() {
+    if (this.id) {
+      this.data.deleteTest(this.id).subscribe(response => { })
+      window.location.reload()
+    }
   }
 
   ngOnInit(): void {

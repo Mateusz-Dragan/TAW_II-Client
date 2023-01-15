@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { MatRadioChange } from '@angular/material/radio';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AuthService } from 'src/app/services/auth.service';
 import { DataService } from 'src/app/services/data.service';
+import { MatDialog } from '@angular/material/dialog';
+import { ResultPopupComponent } from './result-popup/result-popup.component';
 
 
 @Component({
@@ -17,7 +20,7 @@ export class SolveTestComponent implements OnInit {
   userAnswers =[0];
   id!: string
 
-  constructor(private service: DataService, private route: ActivatedRoute, private router: Router) { }
+  constructor(private service: DataService, private route: ActivatedRoute, private router: Router, private auth: AuthService, private dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.id = '';
@@ -41,6 +44,10 @@ export class SolveTestComponent implements OnInit {
     });
   }
 
+  openDialog(){
+    this.dialog.open(ResultPopupComponent)
+  }
+
   nextQuestion(){
     if(this.currentQuestionIdx < this.questions$.length - 1){
       this.currentQuestionIdx += 1
@@ -57,13 +64,14 @@ export class SolveTestComponent implements OnInit {
   sendAnswers(){
     let answersToSend={
       test_id: Number(this.id),
-      user_id: 1,
+      user_id: this.auth.getData().id,
       user_answers: this.userAnswers
     }
     console.log(answersToSend)
     this.service.sendAnswersToTest(answersToSend).subscribe(response => {
       console.log(response)
-      this.router.navigateByUrl('/')
+      this.dialog.open(ResultPopupComponent,{data:{test_id: Number(this.id),
+        user_id: this.auth.getData().id}})
     });
   }
 

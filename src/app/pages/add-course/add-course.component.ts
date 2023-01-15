@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, FormArray } from '@angular/forms';
+import { Router } from '@angular/router';
 import { DataService } from 'src/app/services/data.service';
 
 @Component({
@@ -21,7 +22,7 @@ export class AddCourseComponent implements OnInit {
     course_id: 0
   }
 
-  constructor(private fb: FormBuilder, private service: DataService) { }
+  constructor(private fb: FormBuilder, private service: DataService, private router: Router) { }
 
   ngOnInit() {
     this.courseForm = this.fb.group({
@@ -75,6 +76,7 @@ export class AddCourseComponent implements OnInit {
         console.log(response)
       })
     }
+    this.router.navigateByUrl('/courselist')
   }
 
 

@@ -8,7 +8,7 @@
 
 <mat-sidenav-container>
 
-  <mat-sidenav #sidenav="matSidenav">
+  <mat-sidenav #sidenav="matSidenav" class="mat-elevation-z8">
     <button mat-button class="sidebar-button" routerLink="/home">
       <mat-icon>home</mat-icon>
       <span>Strona Główna</span>
@@ -21,6 +21,14 @@
       <mat-icon>chrome_reader_mode</mat-icon>
       <span>Kursy</span>
     </button>
+
+    <mat-divider></mat-divider>
+    <button *ngIf="!this.auth.isLoggedIn()" ng mat-button class="sidebar-button" routerLink="/signin">
+      <span>Zaloguj się</span>
+    </button>
+    <button *ngIf="this.auth.isLoggedIn()" ng mat-button class="sidebar-button" (click)="logOut()" routerLink="/signin">
+      <span>Wyloguj się</span>
+    </button>
   </mat-sidenav>
 
   <mat-sidenav-content>
@@ -28,5 +36,5 @@
       <router-outlet></router-outlet>
     </div>
   </mat-sidenav-content>
-  
+
 </mat-sidenav-container>

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
 import { DataService } from 'src/app/services/data.service';
 
 @Component({
@@ -24,7 +25,7 @@ export class AddQuizComponent implements OnInit {
     answers: ['']
   }
 
-  constructor(private fb: FormBuilder, private service: DataService) { }
+  constructor(private fb: FormBuilder, private service: DataService, private router: Router) { }
 
   ngOnInit() {
     this.questionForm = this.fb.group({
@@ -106,6 +107,7 @@ export class AddQuizComponent implements OnInit {
         console.log(response)
       })
     }
+    this.router.navigateByUrl('/quizlist')
   }
 
   addAnswersToArray(answers: any){

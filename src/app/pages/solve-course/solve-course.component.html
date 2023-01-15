@@ -1,23 +1,22 @@
 <div style="padding:25px">
     <div *ngIf="!course$ && !courseMaterials$" class="spinner-grow text primary"></div>
-    <div *ngIf="course$ && courseMaterials$">
-    <div style="display: flex; align-items: center; flex-direction: column;">
-        <h4>{{course$.course_name}}</h4>
+    <div *ngIf="course$ && courseMaterials$" class="card">
+    <div class="card-header" style="display: flex; align-items: center; flex-direction: column; color: black;">
+        <h3>{{course$.course_name}}</h3>
         <h4>Kategoria: {{course$.category}}</h4>
     </div>
 
 
-    <div>
-        <div style="display: flex; justify-content: flex-end;">
+    <div class="card-body" style="color: black;">
+        <div style="display: flex; justify-content: flex-end; padding: 10px;">
             <h3>Strona: {{currentMaterialIdx + 1}}/{{courseMaterials$.length}}</h3>
         </div>
         <div style="display: flex; justify-content: center;">
-            <div style="display: flex; justify-content: flex-start; background-color: white; width: 70%; 
-                        height: 500px; color: black; border-radius: 5px; padding: 15px;">
+            <div style="width: 100%; background-color: rgb(243, 238, 225); color: black; padding: 15px; border-radius: 5px; border: 1px solid black;">
                 <p>{{courseMaterials$[currentMaterialIdx].content}}</p>
             </div>
         </div>
-        <div style="display: flex; justify-content: space-around;">
+        <div style="display: flex; justify-content: space-between; padding-top: 5px; padding: 10px;">
             <button class="btn btn-danger" (click)="previousMaterial()" [disabled]="disableButton()">Cofnij</button>
             <button *ngIf="currentMaterialIdx !== courseMaterials$.length-1" class="btn btn-primary"
                 (click)="nextMaterial()">Przejdź dalej</button>

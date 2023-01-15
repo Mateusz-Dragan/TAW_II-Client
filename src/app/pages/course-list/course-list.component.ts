@@ -9,6 +9,8 @@ import { DataService } from 'src/app/services/data.service';
 export class CourseListComponent implements OnInit {
 
   public courses$: any;
+  public currentCourses$: any
+  search=''
 
   constructor(private service: DataService) { }
 
@@ -19,7 +21,18 @@ export class CourseListComponent implements OnInit {
   getAll(){
     this.service.getAllCourses().subscribe(response => {
       this.courses$ = response;
+      this.currentCourses$ = this.courses$
     });
   }
 
+  filterCourseNames(){
+    if(this.search === ''){
+      this.currentCourses$ = this.courses$
+    }
+    else{
+      this.currentCourses$=this.courses$.filter((obj: { course_name: string | string[]; })=>{
+        return obj.course_name.includes(this.search)
+      })
+    }
+  }
 }

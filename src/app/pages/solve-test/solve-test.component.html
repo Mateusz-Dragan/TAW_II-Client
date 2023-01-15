@@ -1,30 +1,31 @@
-<div style="padding:25px">
+<div style="padding:25px;display: flex; justify-content: center;">
     <div *ngIf="!test$ && !questions$" class="spinner-grow text primary"></div>
-    <div *ngIf="test$ && questions$">
-        <div style="display: flex; align-items: center; flex-direction: column;">
-            <h4>{{test$.test_name}}</h4>
+    <div *ngIf="test$ && questions$" class="card" style="width: 70%; height: 60%;">
+        
+        <div class="card-header" style="display: flex; align-items: center; flex-direction: column; color: black;">
+            <h3>{{test$.test_name}}</h3>
             <h4>Kategoria: {{test$.category}}</h4>
         </div>
 
 
-        <div>
-            <div style="display: flex; justify-content: space-around;">
-                <h3>Pytanie: {{questions$[currentQuestionIdx].question}}</h3>
-                <h3>{{currentQuestionIdx + 1}}/{{questions$.length}}</h3>
+        <div class="card-body" style="color: black;">
+            <div style="display: flex; justify-content: space-between; padding: 10px;">
+                <h2 >Pytanie: {{questions$[currentQuestionIdx].question}}</h2>
+                <h3 >{{currentQuestionIdx + 1}}/{{questions$.length}}</h3>
             </div>
-            <div style="display: flex; justify-content: center;">
-            <div style="width: 75%; background-color: rgb(211, 241, 250); color: black; padding: 15px; border-radius: 5px;">
-                <label id="example-radio-group-label">Wybierz odpowiedź:</label>
+            <div style="display: flex; justify-content: flex-start;">
+            <div style="width: 100%; background-color: rgb(243, 238, 225); color: black; padding: 15px; border-radius: 5px; border: 1px solid black;">
+                <h2 >Wybierz odpowiedź:</h2>
                 <mat-radio-group style="display:flex; align-items:flex-start; flex-direction: column;"
                     (change)="handleChange($event)" name="radioGroup1" aria-labelledby="example-radio-group-label"
                     *ngFor="let answer of questions$[currentQuestionIdx].answers; let i = index">
-                    <mat-radio-button value={{i}} [checked]="checkIfRadioButtonHasAnswer(i)" color="primary">
+                    <mat-radio-button style="padding: 5px;" value={{i}} [checked]="checkIfRadioButtonHasAnswer(i)" color="primary">
                         {{answer}}
                     </mat-radio-button>
                 </mat-radio-group>
             </div>
         </div>
-            <div style="display: flex; justify-content: space-around;">
+            <div style="display: flex; justify-content: space-between; padding-top: 5px; padding: 10px;">
                 <button class="btn btn-danger" (click)="previousQuestion()">Cofnij</button>
                 <button *ngIf="currentQuestionIdx !== questions$.length-1" class="btn btn-primary"
                     (click)="nextQuestion()">Przejdź dalej</button>
