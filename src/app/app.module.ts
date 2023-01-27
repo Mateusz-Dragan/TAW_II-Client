@@ -18,7 +18,6 @@ import { QuizlistComponent } from './pages/quizlist/quizlist.component';
 import { HomeComponent } from './pages/home/home.component';
 import { DataService } from './services/data.service';
 import { AuthService } from './services/auth.service';
-import { AlertService } from './services/alert.service';
 import { QuizItemComponent } from './pages/quizlist/quiz-item/quiz-item.component';
 import { AddQuizComponent } from './pages/add-quiz/add-quiz.component';
 import { SolveTestComponent } from './pages/solve-test/solve-test.component';
@@ -28,6 +27,8 @@ import { CourseItemComponent } from './pages/course-list/course-item/course-item
 import { SolveCourseComponent } from './pages/solve-course/solve-course.component';
 import { SignupComponent } from './pages/signup/signup.component';
 import { SigninComponent } from './pages/signin/signin.component';
+import { UpdateQuizComponent } from './pages/update-quiz/update-quiz.component';
+import { UpdateCourseComponent } from './pages/update-course/update-course.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,9 @@ import { SigninComponent } from './pages/signin/signin.component';
     CourseItemComponent,
     SolveCourseComponent,
     SignupComponent,
-    SigninComponent
+    SigninComponent,
+    UpdateQuizComponent,
+    UpdateCourseComponent
   ],
   imports: [
     BrowserModule,
@@ -62,7 +65,7 @@ import { SigninComponent } from './pages/signin/signin.component';
     MatFormFieldModule,
     
   ],
-  providers: [DataService, AuthService, AlertService],
+  providers: [DataService, AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

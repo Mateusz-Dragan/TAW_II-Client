@@ -9,6 +9,8 @@ import { SigninComponent } from './pages/signin/signin.component';
 import { SignupComponent } from './pages/signup/signup.component';
 import { SolveCourseComponent } from './pages/solve-course/solve-course.component';
 import { SolveTestComponent } from './pages/solve-test/solve-test.component';
+import { UpdateCourseComponent } from './pages/update-course/update-course.component';
+import { UpdateQuizComponent } from './pages/update-quiz/update-quiz.component';
 import { AuthguardGuard } from './shared/authguard.guard';
 
 const routes: Routes = [
@@ -46,6 +48,11 @@ const routes: Routes = [
     canActivate: [AuthguardGuard]
   },
   {
+    path: 'quizUpdate/:id',
+    component: UpdateQuizComponent,
+    canActivate: [AuthguardGuard]
+  },
+  {
     path: 'courselist',
     component: CourseListComponent,
     canActivate: [AuthguardGuard]
@@ -58,6 +65,11 @@ const routes: Routes = [
   {
     path: 'course/:id',
     component: SolveCourseComponent,
+    canActivate: [AuthguardGuard]
+  },
+  {
+    path: 'courseUpdate/:id',
+    component: UpdateCourseComponent,
     canActivate: [AuthguardGuard]
   }
   // {

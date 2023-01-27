@@ -7,7 +7,7 @@
     </div>
     <div style="display:flex; flex-wrap: wrap; overflow-y: auto; height: 700px; padding-top: 10px;">
         <div style="width:25%; padding-top: 15px;"*ngFor="let course of currentCourses$">
-            <course-item [id]="course.id" [courseName]="course.course_name" [category]="course.category" ></course-item>
+            <course-item [id]="course.id" [courseName]="course.course_name" [category]="course.category" (deleteCourse)="deleteCourse($event.id)"></course-item>
           </div>
     </div>
 </div>

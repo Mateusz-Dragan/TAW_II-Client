@@ -12,7 +12,7 @@
             <h3>Strona: {{currentMaterialIdx + 1}}/{{courseMaterials$.length}}</h3>
         </div>
         <div style="display: flex; justify-content: center;">
-            <div style="width: 100%; background-color: rgb(243, 238, 225); color: black; padding: 15px; border-radius: 5px; border: 1px solid black;">
+            <div style="max-height: 540px; width: 100%;overflow-y: auto; background-color: rgb(243, 238, 225); color: black; padding: 15px; border-radius: 5px; border: 1px solid black;">
                 <p>{{courseMaterials$[currentMaterialIdx].content}}</p>
             </div>
         </div>

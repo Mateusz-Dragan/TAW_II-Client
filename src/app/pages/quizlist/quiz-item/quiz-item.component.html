@@ -2,7 +2,10 @@
     style="width:90%; border: 2px solid gray; border-radius: 5px; cursor: pointer; padding: 5px; background-color: white; color:black">
     <div class="card-header" style="display: flex; justify-content: space-between;">
         <h2>Test: {{testName}}</h2>
-        <button class="btn btn-danger" (click)="deleteTest()">Usuń</button>
+        <div style="display: flex; flex-direction: column; height: 50%;">
+            <button class="btn btn-secondary" style="margin-bottom: 5px;" (click)="goToUpdateQuiz()">Edytuj</button>
+            <button class="btn btn-danger" (click)="onClick()">Usuń</button>
+        </div>
     </div>
     <div class="card-body" (click)="goToQuiz()">
         <h3>Kategoria: {{category}}</h3>

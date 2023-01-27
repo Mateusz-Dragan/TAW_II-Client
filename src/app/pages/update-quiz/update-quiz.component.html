@@ -1,5 +1,6 @@
 <div style="display: flex; justify-content: center; padding: 50px;">
-    <form style="width: 70%; height: 60%; padding: 25px;" class="card" [formGroup]="questionForm"
+    <div *ngIf="!test$" class="spinner-grow text primary"></div>
+    <form *ngIf="test$" style="width: 70%; height: 60%; padding: 25px;" class="card" [formGroup]="questionForm"
         (ngSubmit)="onSubmit()">
         <div class="card-header" style="display: flex; align-items: center; flex-direction: column;">
             <div style="display: flex; flex-direction: column; padding: 10px;">
@@ -13,7 +14,7 @@
                     formControlName="category">
             </div>
         </div>
-        <div class="card-body" style="display: flex; align-items: center; flex-direction: column;"
+        <div *ngIf="questions$" class="card-body" style="display: flex; align-items: center; flex-direction: column;"
             formArrayName="questions">
             <div style=" overflow-y: auto; height: 400px;">
                 <div *ngFor="let item of questions().controls; let i=index">
@@ -45,7 +46,8 @@
         </div>
         <button [disabled]="this.questionForm.value.test_name ==='' || this.questionForm.value.category ==='' || this.questionForm.value.questions.length < 1 ||
         this.questionForm.value.questions[0].question === ''" style="width:25%" mat-raised-button color="accent"
-            type="submit">Dodaj test</button>
+            type="submit">Edytuj test</button>
+        
     </form>
-
 </div>
+

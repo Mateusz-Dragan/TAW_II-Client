@@ -14,7 +14,7 @@
                 <h3 >{{currentQuestionIdx + 1}}/{{questions$.length}}</h3>
             </div>
             <div style="display: flex; justify-content: flex-start;">
-            <div style="width: 100%; background-color: rgb(243, 238, 225); color: black; padding: 15px; border-radius: 5px; border: 1px solid black;">
+            <div style="max-height: 540px; width: 100%; overflow-y: auto; background-color: rgb(243, 238, 225); color: black; padding: 15px; border-radius: 5px; border: 1px solid black;">
                 <h2 >Wybierz odpowiedź:</h2>
                 <mat-radio-group style="display:flex; align-items:flex-start; flex-direction: column;"
                     (change)="handleChange($event)" name="radioGroup1" aria-labelledby="example-radio-group-label"
@@ -26,7 +26,7 @@
             </div>
         </div>
             <div style="display: flex; justify-content: space-between; padding-top: 5px; padding: 10px;">
-                <button class="btn btn-danger" (click)="previousQuestion()">Cofnij</button>
+                <button class="btn btn-danger" (click)="previousQuestion()" [disabled]="disableButton()">Cofnij</button>
                 <button *ngIf="currentQuestionIdx !== questions$.length-1" class="btn btn-primary"
                     (click)="nextQuestion()">Przejdź dalej</button>
                 <button *ngIf="currentQuestionIdx === questions$.length-1" class="btn btn-success"

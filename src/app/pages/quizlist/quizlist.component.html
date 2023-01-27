@@ -7,7 +7,7 @@
     </div>
     <div style="display:flex; flex-wrap: wrap; overflow-y: auto; height: 700px; padding-top: 10px;">
         <div style="width:25%; padding-top: 15px;"*ngFor="let test of currentTests$">
-            <quiz-item [id]="test.id" [testName]="test.test_name" [category]="test.category" [points]="test.points"></quiz-item>
+            <quiz-item [id]="test.id" [testName]="test.test_name" [category]="test.category" [points]="test.points" (deleteTest)="deleteTest($event.id)"></quiz-item>
           </div>
     </div>
 </div>

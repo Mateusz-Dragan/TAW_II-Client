@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 import { DataService } from 'src/app/services/data.service';
 
@@ -13,6 +13,7 @@ export class QuizItemComponent implements OnInit {
   @Input() testName?: string;
   @Input() category?: string;
   @Input() points?: number;
+  @Output() deleteTest:EventEmitter<any>= new EventEmitter()
 
   constructor(private router: Router, private data: DataService) { }
 
@@ -20,11 +21,12 @@ export class QuizItemComponent implements OnInit {
     this.router.navigateByUrl('/quiz/' + this.id)
   }
 
-  deleteTest() {
-    if (this.id) {
-      this.data.deleteTest(this.id).subscribe(response => { })
-      window.location.reload()
-    }
+  onClick(){
+    this.deleteTest.emit({id: this.id})
+  }
+
+  goToUpdateQuiz(){
+    this.router.navigateByUrl('/quizUpdate/' + this.id)
   }
 
   ngOnInit(): void {

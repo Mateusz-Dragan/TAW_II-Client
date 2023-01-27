@@ -35,4 +35,18 @@ export class CourseListComponent implements OnInit {
       })
     }
   }
+
+  deleteCourse(id: number) {
+    console.log(id)
+    if (id) {
+      this.service.deleteCourse(id).subscribe(response => { 
+        this.currentCourses$ = this.currentCourses$.filter(function(obj: { id: number; }) {
+          return obj.id !== id
+        })
+        this.courses$ = this.courses$.filter(function(obj: { id: number; }) {
+          return obj.id !== id
+        })
+      })
+    }
+  }
 }

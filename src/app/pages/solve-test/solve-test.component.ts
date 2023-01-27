@@ -48,6 +48,13 @@ export class SolveTestComponent implements OnInit {
     this.dialog.open(ResultPopupComponent)
   }
 
+  disableButton(){
+    if(this.currentQuestionIdx === 0){
+      return true
+    }
+    return false;
+  }
+
   nextQuestion(){
     if(this.currentQuestionIdx < this.questions$.length - 1){
       this.currentQuestionIdx += 1

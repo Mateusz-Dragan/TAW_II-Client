@@ -1,5 +1,6 @@
 <div style="display: flex; justify-content: center; padding: 50px;">
-    <form style="width: 70%; height: 60%; padding: 25px;" class="card" [formGroup]="courseForm" (ngSubmit)="onSubmit()">
+    <div *ngIf="!course$" class="spinner-grow text primary"></div>
+    <form *ngIf="course$" style="width: 70%; height: 60%; padding: 25px;" class="card" [formGroup]="courseForm" (ngSubmit)="onSubmit()">
         <div class="card-header" style="display: flex; align-items: center; flex-direction: column;">
             <div style="display: flex; flex-direction: column; padding: 10px;">
                 <span style="color: black; font-size: large;">Nazwa kursu: </span>
@@ -10,7 +11,7 @@
                 <input id="category" type="text" placeholder="Podaj nazwę kategorii" formControlName="category">
             </div>
         </div>
-        <div class="card-body" style="display: flex; align-items: center; flex-direction: column;" formArrayName="course_materials">
+        <div *ngIf="courseMaterials$" class="card-body" style="display: flex; align-items: center; flex-direction: column;" formArrayName="course_materials">
             <div style=" overflow-y: auto; height: 400px;">
             <div *ngFor="let item of courseMaterials().controls; let i=index">
                 <div [formGroupName]="i" style=" padding: 15px; width: 600px; margin: 5px;">
@@ -23,6 +24,6 @@
             
         </div><button mat-raised-button color="accent" type="button" (click)="addCourseMaterial()">Dodaj materiał do kursu</button>
         </div>
-        <button [disabled]="this.courseForm.value.course_name ==='' || this.courseForm.value.category ==='' || this.courseForm.value.course_materials.length < 1" style="width:25%" mat-raised-button color="accent" type="submit">Dodaj kurs</button>
+        <button style="width:25%" mat-raised-button color="accent" type="submit">Edytuj</button>
     </form>
 </div>
